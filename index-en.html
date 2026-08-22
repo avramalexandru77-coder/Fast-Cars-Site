@@ -559,7 +559,7 @@
     if(problem){ lines.push('Issue: ' + problem); }
     var message = encodeURIComponent(lines.join('\n'));
 
-    var numbers = ['40756395632', '40756395632']; // TEST — revert to ['40773316628', '40756531038'] when done testing
+    var numbers = ['40773316628', '40756531038'];
     var win1 = window.open('https://wa.me/' + numbers[0] + '?text=' + message, '_blank');
     var win2 = window.open('https://wa.me/' + numbers[1] + '?text=' + message, '_blank');
 
