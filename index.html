@@ -158,8 +158,9 @@
 
   .wa-form{max-width:480px;margin:0 auto;display:flex;flex-direction:column;gap:16px;}
   .wa-form label{display:block;font-size:12px;color:var(--muted);margin-bottom:7px;font-family:'IBM Plex Mono',monospace;letter-spacing:.03em;}
-  .wa-form input{width:100%;background:var(--bg-card);border:1px solid var(--line);border-radius:var(--radius);padding:13px 14px;color:var(--ink);font-family:'Inter',sans-serif;font-size:14.5px;}
-  .wa-form input::placeholder{color:#565C66;}
+  .wa-form input,.wa-form textarea{width:100%;background:var(--bg-card);border:1px solid var(--line);border-radius:var(--radius);padding:13px 14px;color:var(--ink);font-family:'Inter',sans-serif;font-size:14.5px;}
+  .wa-form textarea{resize:vertical;min-height:90px;}
+  .wa-form input::placeholder,.wa-form textarea::placeholder{color:#565C66;}
   .wa-form button{align-self:center;margin-top:6px;}
   .wa-fallback{text-align:center;font-size:12.5px;color:var(--muted);margin-top:4px;}
   .wa-fallback a{color:var(--red);text-decoration:underline;}
@@ -361,6 +362,7 @@
         <div><label for="waPhone">Număr de telefon *</label><input id="waPhone" type="tel" placeholder="07xx xxx xxx" required></div>
         <div><label for="waBrand">Marca auto *</label><input id="waBrand" type="text" placeholder="ex. BMW 320d" required></div>
         <div><label for="waVin">VIN (opțional)</label><input id="waVin" type="text" placeholder="Seria de șasiu a mașinii"></div>
+        <div><label for="waProblem">Descrierea problemei (opțional)</label><textarea id="waProblem" placeholder="Spune-ne ce se întâmplă cu mașina…"></textarea></div>
         <button class="btn primary" type="submit">Trimite pe WhatsApp</button>
         <p class="wa-fallback" id="waFallback"></p>
       </form>
@@ -545,6 +547,7 @@
     var phone = document.getElementById('waPhone').value.trim();
     var brand = document.getElementById('waBrand').value.trim();
     var vin = document.getElementById('waVin').value.trim();
+    var problem = document.getElementById('waProblem').value.trim();
     if(!phone || !brand){ return false; }
 
     var lines = [
@@ -553,6 +556,7 @@
       'Marca auto: ' + brand
     ];
     if(vin){ lines.push('VIN: ' + vin); }
+    if(problem){ lines.push('Problema: ' + problem); }
     var message = encodeURIComponent(lines.join('\n'));
 
     var numbers = ['40773316628', '40756531038'];
